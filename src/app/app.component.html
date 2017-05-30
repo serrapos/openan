@@ -11,19 +11,32 @@
         <div class="ui-g-12">
             <div class="ui-g-6">
               <h3>Filtro</h3>
+              <md-select placeholder="Tipo" [(ngModel)]="newNameParam">
+                <md-option *ngFor="let t of paramTypes" [value]="t">
+                  {{ t }}
+                </md-option>
+              </md-select>
               <md-input-container class="example-full-width">
-                <input mdInput placeholder="Campo" [(ngModel)]="newNameParam">
+                <input mdInput placeholder="Condición" [(ngModel)]="newValueParam">
               </md-input-container>
-              <md-input-container class="example-full-width">
-                <input mdInput placeholder="Campo" [(ngModel)]="newValueParam">
-              </md-input-container>
-              <a md-mini-fab (click)="addItem()"><md-icon>add</md-icon></a>
-              <md-icon>home</md-icon>
-              <button type="button" (click)="addItem()" pButton label="Añadir"></button>
-              <button type="button" (click)="searchSolr()" pButton label="Buscar"></button>
+              <a md-mini-fab (click)="addItem()"><md-icon>+</md-icon></a>              
             </div>
             <div class="ui-g-6">
-              <h3>Orden</h3>
+              <h3>Paginación / Orden</h3>
+              <md-select placeholder="Max resultados" [(ngModel)]="limits">
+                <md-option *ngFor="let n of maxResultsAllows" [value]="n">
+                  {{ n }}
+                </md-option>
+              </md-select>
+              <md-input-container>
+                <input mdInput placeholder="Campo ordenación" [(ngModel)]="orderBy">
+              </md-input-container>
+              <md-radio-group [(ngModel)]="typeOrder">
+                <md-radio-button value="asc">ASC</md-radio-button>
+                <md-radio-button value="desc">DESC</md-radio-button>
+              </md-radio-group>
+
+
             </div>
         </div>
         <div>
@@ -31,6 +44,8 @@
             {{q.name}}={{q.value}}
             <button pButton type="button" (click)="deleteQueryParam(i)" icon="fa-close"></button>
           </span>
+          <br/>
+          <button type="button" (click)="searchSolr()" pButton label="Buscar"></button>
         </div>
         <div class="ui-g-12">          
           <p-dataTable [value]="docs" resizableColumns="true" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[10,50,100]">

@@ -31,19 +31,29 @@ export class AppComponent implements OnInit {
     queryParams: QueryParams[];
     newNameParam: string;
     newValueParam: string;
+    maxResultsAllows: number[];
+    paramTypes: string[];
+    limits: number;
+    orderBy: string;
+    typeOrder: string;
 
     constructor(private solrService: SolrService) { }
 
     ngOnInit(): void {
         this.queryParams = [];
         this.query = '';
+        this.newNameParam = 'fq';
+        this.maxResultsAllows = [10, 50, 100, 500];
+        this.paramTypes = ['fq', 'q'];
+        this.limits = 100;
+        this.orderBy = 'score';
+        this.typeOrder = 'asc';
     }
 
     addItem() {
         const newParam: QueryParams = {name: this.newNameParam, value: this.newValueParam};
         this.queryParams.push(newParam);
         this.generateQuery();
-        this.newNameParam = '';
         this.newValueParam = '';
     }
 

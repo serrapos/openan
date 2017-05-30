@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdButtonModule, MdCheckboxModule, MdInputModule, MdIconModule } from '@angular/material';
+import { MdButtonModule, MdCheckboxModule, MdInputModule, MdIconModule, MdSelectModule, MdRadioModule } from '@angular/material';
 import { MessagesModule, ButtonModule, DataTableModule, SharedModule, InputTextModule, OrderListModule } from 'primeng/primeng';
 import { SolrService } from './services/solr.service';
 
@@ -30,7 +30,9 @@ import { AppComponent } from './app.component';
     MdButtonModule, //Angular Material
     MdCheckboxModule,
     MdInputModule,
-    MdIconModule
+    MdIconModule,
+    MdSelectModule,
+    MdRadioModule
   ],
   providers: [
     SolrService
