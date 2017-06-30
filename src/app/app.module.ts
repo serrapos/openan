@@ -10,10 +10,24 @@ import { SolrService } from './services/solr.service';
 //Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
+import { PageComponent } from './layouts/page/page.component';
+import { MenuComponent } from './layouts/menu/menu.component';
+import { HeaderComponent } from './layouts/header/header.component';
+import { SolrPageComponent } from './features/solr/solr-page/solr-page.component';
+import { SolrFilterComponent } from './features/solr/solr-filter/solr-filter.component';
+import { SolrResultsComponent } from './features/solr/solr-results/solr-results.component';
+import { SolrResultItemComponent } from './features/solr/solr-result-item/solr-result-item.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PageComponent,
+    MenuComponent,
+    HeaderComponent,
+    SolrPageComponent,
+    SolrFilterComponent,
+    SolrResultsComponent,
+    SolrResultItemComponent
   ],
   imports: [
     BrowserModule,

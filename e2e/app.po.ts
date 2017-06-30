@@ -6,6 +6,6 @@ export class OpenanPage {
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+    return element(by.css('openan-root h1')).getText();
   }
 }
