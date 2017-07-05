@@ -8,7 +8,7 @@ import { SolrResult } from '../../../model/solr-result';
 import { Response } from '../../../model/response';
 import { Doc } from '../../../model/doc';
 import { QueryParams } from '../../../model/query-params';
-import { SolrService } from '../../../services/solr.service';
+import { SolrService } from '../services/solr.service';
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
