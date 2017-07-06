@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Doc } from '../../../model/doc';
 
 @Component({
   selector: 'openan-solr-result-item',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./solr-result-item.component.css']
 })
 export class SolrResultItemComponent implements OnInit {
+
+  @Input() doc: Doc;
 
   constructor() { }
 

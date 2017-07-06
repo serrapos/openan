@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdButtonModule, MdCheckboxModule, MdInputModule, MdIconModule, MdSelectModule, MdRadioModule } from '@angular/material';
 import { MessagesModule, ButtonModule, DataTableModule, SharedModule, InputTextModule, OrderListModule } from 'primeng/primeng';
-import { SolrService } from './services/solr.service';
+import { SolrService } from './features/solr/services/solr.service';
 
 //Bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';

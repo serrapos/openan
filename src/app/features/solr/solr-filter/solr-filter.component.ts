@@ -61,10 +61,7 @@ export class SolrFilterComponent implements OnInit {
     }
 
     searchSolr() {
-        this.solrService.search(this.query)
-                   .subscribe(
-                     solrResult => (this.solrResult = solrResult, this.docs = solrResult.response.docs),
-                     error =>  this.errorMessage = <any>error);
+        this.solrService.search(this.query);
     }
 
     generateQuery() {
