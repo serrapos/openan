@@ -6,14 +6,17 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { SolrResult } from '../../../model/solr-result';
-import { Doc } from '../../../model/doc';
+import { SolrResult } from '../model/solr-result';
+import { Doc } from '../model/doc';
 
 @Injectable()
 export class SolrService {
   solrResult: SolrResult;
   errorMessage: any;
   query: string;
+  private urlSolrBase = 'http://opencmshispano.com/handleSolrSelect?';
+  private getJsonParam = 'wt=json&';
+  private solrQueryResourceTypes = 'fq=type:*&facet=true&facet.field=type';
   private errorMessageSource = new Subject<String>();
   errorMessageObservable$ = this.errorMessageSource.asObservable();
   private solrResultSource = new Subject<SolrResult>();
@@ -22,12 +25,19 @@ export class SolrService {
   constructor(private http: Http) { }
 
   search(solrQuery: string) {
-    const urlSolr:string = 'http://opencmshispano.com/handleSolrSelect?wt=json&' + solrQuery;
+    const url: string = this.urlSolrBase + this.getJsonParam + solrQuery;
     this.http
-      .get(urlSolr)
+      .get(url)
       .map((r: Response) => r.json() as SolrResult).subscribe(
         solrResult => (this.solrResultSource.next(solrResult)),
         error =>  this.errorMessageSource.next(error));
+  }
+
+  getResourceTypes(): Observable<SolrResult>{
+    const url: string = this.urlSolrBase + this.getJsonParam + this.solrQueryResourceTypes;
+    return this.http
+      .get(url)
+      .map((r: Response) => r.json() as SolrResult);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Doc } from '../../../model/doc';
-import { SolrService } from '../services/solr.service';
+import { SolrService } from '../../../services/solr.service';
 import { SolrResult } from '../../../model/solr-result';
 import { Response } from '../../../model/response';
 
