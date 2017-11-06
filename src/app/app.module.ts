@@ -6,6 +6,8 @@ import { SolrQueryComponent } from './views/components/solr-query/solr-query.com
 import { SolrQueryService } from './services/solr-query.service';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     LayoutModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    NgbModule.forRoot()
   ],
   providers: [SolrQueryService],
   bootstrap: [AppComponent]

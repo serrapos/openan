@@ -14,17 +14,24 @@ export class SolrQueryComponent implements OnInit {
 
   urlSolr = 'http://www.opencmshispano.com/handleSolrSelect';
   query = 'fq=type:image';
+  finalQuery = 'fq=type:image';
   submitted = false;
   docs: Doc[];
   solrResult: SolrResult;
   errorMessage: any;
+  page = 1;
+  pageSize = 10;
+  sort = 'contentdate desc';
+  site = '/sites/default/';
 
   ngOnInit() {
   }
 
   onSubmit() {
     this.submitted = true;
-    this.solrService.search(this.urlSolr, this.query);
+    const start: number = (this.page - 1) * this.pageSize;
+    this.finalQuery = this.query + '&fq=parent-folders:"' + this.site + '"&start=' + start + '&rows=' + this.pageSize + '&sort=' + this.sort;
+    this.solrService.search(this.urlSolr, this.finalQuery);
     this.solrService.solrResultObservable$.subscribe(
         solrResult => (this.solrResult = solrResult, this.docs = solrResult.response.docs),
         error =>  this.errorMessage = <any>error);

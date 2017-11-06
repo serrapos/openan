@@ -2,21 +2,39 @@
 
 <div>
     <form (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="urlSolr">Solr Url</label>
-          <input type="text" class="form-control" [(ngModel)]="urlSolr" name="urlSolr" placeholder="Introduzca la url del Handle Solr Select"/>
+        <div class="row">
+            <div class="col-6 form-group">
+                <label for="urlSolr">Solr Url</label>
+                <input type="text" class="form-control" [(ngModel)]="urlSolr" name="urlSolr" placeholder="Introduzca la url del Handle Solr Select"/>     
+            </div>
+            <div class="col-2">
+                <label for="pageSize">Page Size</label>
+                <input type="number" class="form-control" [(ngModel)]="pageSize" name="pageSize"/>     
+            </div>
+            <div class="col-2">
+                <label for="site">Site</label>
+                <input type="text" class="form-control" [(ngModel)]="site" name="site"/>     
+            </div>
+            <div class="col-2">
+                <label for="sort">Sort</label>
+                <input type="text" class="form-control" [(ngModel)]="sort" name="sort"/>     
+            </div>
         </div>
-        <div class="form-group">
-            <label for="query">Solr Query</label>
-            <input type="text" class="form-control" [(ngModel)]="query" name="query" placeholder="Introduzca la query a lanzar"/>
+        <div class="row">
+          <div class="col-9 form-group">
+              <label for="query">Solr Query</label>
+              <input type="text" class="form-control" [(ngModel)]="query" name="query" placeholder="Introduzca la query a lanzar"/>
+          </div>
+          <div class="col-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-lg btn-primary">Buscar</button>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary">Buscar</button>
     </form>
 </div>
-<div>
-  <h2>Resultados:</h2>
+<div *ngIf="solrResult">
+  <h2>Resultados:  <span class="badge badge-pill badge-success">{{solrResult.response.numFound}} registros</span></h2>
   <p *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</p>
-  <p>Query : {{query}}</p>
+  <p class="font-italic"><small>Query : {{finalQuery}}</small></p>
   <p></p>
   <table class="table">
       <thead>
@@ -34,4 +52,8 @@
         </tr>
       </tbody>
     </table>
+    <ngb-pagination [collectionSize]="solrResult.response.numFound" [(page)]="page" 
+      aria-label="Default pagination" [maxSize]="5" [boundaryLinks]="true" [pageSize]="pageSize"
+      (pageChange)="onSubmit()">
+    </ngb-pagination>
 </div>
