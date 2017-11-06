@@ -1,0 +1,37 @@
+<h1>Solr Querys</h1>
+
+<div>
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="urlSolr">Solr Url</label>
+          <input type="text" class="form-control" [(ngModel)]="urlSolr" name="urlSolr" placeholder="Introduzca la url del Handle Solr Select"/>
+        </div>
+        <div class="form-group">
+            <label for="query">Solr Query</label>
+            <input type="text" class="form-control" [(ngModel)]="query" name="query" placeholder="Introduzca la query a lanzar"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+</div>
+<div>
+  <h2>Resultados:</h2>
+  <p *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</p>
+  <p>Query : {{query}}</p>
+  <p></p>
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Path</th>
+          <th scope="col">Title</th>
+          <th scope="col">Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doc of docs; index as i; first as isFirst">
+          <td>{{doc.path}}</td>
+          <td>{{doc.Title_prop}}</td>
+          <td>{{doc.type}}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
