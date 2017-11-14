@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SolrResult } from '../../../model/solr-result';
 import { Doc } from '../../../model/doc';
 import { SolrQueryService } from '../../../services/solr-query.service';
+import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-solr-query',
@@ -10,7 +11,7 @@ import { SolrQueryService } from '../../../services/solr-query.service';
 })
 export class SolrQueryComponent implements OnInit {
 
-  constructor(private solrService: SolrQueryService) { }
+  constructor(private solrService: SolrQueryService, private modalService: NgbModal) { }
 
   urlSolr = 'http://www.opencmshispano.com/handleSolrSelect';
   query = 'fq=type:image';
@@ -22,7 +23,7 @@ export class SolrQueryComponent implements OnInit {
   page = 1;
   pageSize = 10;
   sort = 'contentdate desc';
-  site = '/sites/default/';
+  site = '/sites/opencmshispano/';
 
   ngOnInit() {
   }
@@ -30,12 +31,17 @@ export class SolrQueryComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     const start: number = (this.page - 1) * this.pageSize;
-    this.finalQuery = this.query + '&fq=parent-folders:"' + this.site + '"&start=' + start + '&rows=' + this.pageSize + '&sort=' + this.sort;
+    this.finalQuery = this.query + '&fq=parent-folders:"' + this.site + '"&start=' + start + '&rows=' + this.pageSize +
+      '&sort=' + this.sort;
     this.solrService.search(this.urlSolr, this.finalQuery);
     this.solrService.solrResultObservable$.subscribe(
         solrResult => (this.solrResult = solrResult, this.docs = solrResult.response.docs),
         error =>  this.errorMessage = <any>error);
   }
 
+  open(content) {
+    option : NgbModalOptions = {size: 'lg'} ;
+    this.modalService.open(content);
+  }
 
 }

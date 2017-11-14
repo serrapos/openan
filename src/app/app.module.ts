@@ -7,7 +7,7 @@ import { SolrQueryService } from './services/solr-query.service';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     LayoutModule,
     HttpModule,
     FormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    AngularFontAwesomeModule
   ],
   providers: [SolrQueryService],
   bootstrap: [AppComponent]

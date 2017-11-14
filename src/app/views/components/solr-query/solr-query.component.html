@@ -31,6 +31,7 @@
         </div>
     </form>
 </div>
+
 <div *ngIf="solrResult">
   <h2>Resultados:  <span class="badge badge-pill badge-success">{{solrResult.response.numFound}} registros</span></h2>
   <p *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</p>
@@ -42,13 +43,49 @@
           <th scope="col">Path</th>
           <th scope="col">Title</th>
           <th scope="col">Type</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let doc of docs; index as i; first as isFirst">
+        <tr *ngFor="let doc of docs; index as i; first as isFirst">                      
           <td>{{doc.path}}</td>
           <td>{{doc.Title_prop}}</td>
           <td>{{doc.type}}</td>
+          <td>
+            <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Detail</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">Field</th>
+                                <th scope="col">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><th scope="row">ID:</th><td>{{doc.id}}</td></tr>
+                                <tr><th scope="row">Title:</th><td>{{doc.Title_prop}}</td></tr>
+                                <tr><th scope="row">Path:</th><td>{{doc.path}}</td></tr>
+                                <tr><th scope="row">Type:</th><td>{{doc.type}}</td></tr>
+                                <tr><th scope="row">Created:</th><td>{{doc.created}}</td></tr>
+                                <tr><th scope="row">Last Modified:</th><td>{{doc.lastmodified}}</td></tr>
+                                <tr><th scope="row">Released:</th><td>{{doc.released}}</td></tr>
+                                <tr><th scope="row">Content Date:</th><td>{{doc.contentdate}}</td></tr>                                    
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+                    </div>
+            </ng-template>                    
+            <button class="btn btn-lg btn-outline-primary" (click)="open(content)"><fa name="search"></fa></button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -56,4 +93,5 @@
       aria-label="Default pagination" [maxSize]="5" [boundaryLinks]="true" [pageSize]="pageSize"
       (pageChange)="onSubmit()">
     </ngb-pagination>
+    
 </div>
